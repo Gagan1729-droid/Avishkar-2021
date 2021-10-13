@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         binding.navigation.setOnNavigationItemSelectedListener(selectedListener);
         binding.navigation.setSelectedItemId(R.id.nav_home);
         HomeFragment fragment = new HomeFragment();
+
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment, "");
         fragmentTransaction.commit();
