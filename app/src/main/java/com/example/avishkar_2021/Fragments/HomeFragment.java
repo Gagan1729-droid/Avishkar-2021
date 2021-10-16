@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.example.avishkar_2021.Adapters.ItemsAdapter;
+import com.example.avishkar_2021.Models.ExchangeItemModel;
 import com.example.avishkar_2021.Models.ItemModel;
 import com.example.avishkar_2021.Models.UserModel;
 import com.example.avishkar_2021.R;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 FragmentHomeBinding binding;
-ArrayList<ItemModel> list = new ArrayList<>();
+ArrayList<ExchangeItemModel> list = new ArrayList<>();
 FirebaseAuth fAuth;
 DatabaseReference database;
     public HomeFragment(){
@@ -65,10 +66,20 @@ DatabaseReference database;
 
             }
         });
-        ItemModel model = new ItemModel(330, "The Taj", "https://firebasestorage.googleapis.com/v0/b/avishkar-e4e7d.appspot.com/o/taj.png?alt=media&token=a0392db2-ef5d-4ff0-af62-7894bae8fa46");
-        list.add(model);
-        model = new ItemModel(232, "hfadsfdf", "https://firebasestorage.googleapis.com/v0/b/avishkar-e4e7d.appspot.com/o/taj.png?alt=media&token=a0392db2-ef5d-4ff0-af62-7894bae8fa46");
-        list.add(model);
+        database.child("Exchanges Available").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    ExchangeItemModel model = dataSnapshot.getValue(ExchangeItemModel.class);
+                    list.add(model);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
         adapter.notifyDataSetChanged();
         return binding.getRoot();
     }

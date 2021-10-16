@@ -47,7 +47,7 @@ public class ExchangeActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         uid = fAuth.getUid();
         database = FirebaseDatabase.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference().child("Items");
+        storageReference = FirebaseStorage.getInstance().getReference();
         long timestamp = new Date().getTime();
         String item_id = uid + timestamp;
 
@@ -126,7 +126,8 @@ public class ExchangeActivity extends AppCompatActivity {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if(resultCode == RESULT_OK){
-                storageReference.child(uid + Long.toString(new Date(). getTime())).putFile(result.getUri()).addOnSuccessListener(taskSnapshot -> storageReference.getDownloadUrl()
+                storageReference = storageReference.child("Items").child(uid + Long.toString(new Date(). getTime()));
+                storageReference.putFile(result.getUri()).addOnSuccessListener(taskSnapshot -> storageReference.getDownloadUrl()
                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {

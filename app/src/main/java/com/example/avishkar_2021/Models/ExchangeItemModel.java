@@ -1,7 +1,11 @@
 package com.example.avishkar_2021.Models;
 
 public class ExchangeItemModel {
-    String item_name, city, description, item_id, items_exchange, item_images;
+    String item_name, city, description, item_id, items_exchange, item_images, seller_name;
+    long timestamp;
+
+    public ExchangeItemModel() {
+    }
 
     public ExchangeItemModel(String item_name, String city, String description, String item_id, String items_exchange, String item_images) {
         this.item_name = item_name;
