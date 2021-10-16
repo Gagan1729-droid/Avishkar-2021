@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="160dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="5dp"
     app:cardElevation="5dp"
-    android:background="@drawable/cardview_background">
+    android:background="@drawable/cardview_background"
+    android:padding="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/item_image"
@@ -23,17 +23,10 @@
             android:id="@+id/item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textAppearance="?attr/textAppearanceHeadline6"
             android:textColor="@color/black"
-            android:gravity="center"/>
-        <TextView
-            android:id="@+id/item_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="18sp"
             android:gravity="center"
-            android:background="@drawable/price_background"/>
+            android:padding="5dp"/>
 
     </LinearLayout>
 

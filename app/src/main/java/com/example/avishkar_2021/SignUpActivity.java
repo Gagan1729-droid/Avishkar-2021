@@ -20,6 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Date;
+
 public class SignUpActivity extends AppCompatActivity {
 ActivitySignUpBinding binding;
 FirebaseAuth fAuth;
@@ -44,21 +46,25 @@ boolean isNGO;
                         email = binding.email.getText().toString(),
                         password = binding.password.getText().toString();
                 if(email.isEmpty()){
-                    binding.email.setError("Email necessary");
+                    binding.emailText.setError("Email necessary");
                     return;
-                }
+                } else binding.emailText.setError(null);
+
                 if(name.isEmpty()){
-                    binding.userName.setError("Name necessary");
+                    binding.nameText.setError("Name necessary");
                     return;
-                }
+                } else binding.nameText.setError(null);
+
                 if(password.isEmpty()){
-                    binding.password.setError("Password is required");
+                    binding.passwordText.setError("Password is required");
                     return;
-                }
+                } else binding.passwordText.setError(null);
+
                 if(password.length() < 6){
-                    binding.password.setError("Password must be atleast 6 characters");
+                    binding.passwordText.setError("Password must be atleast 6 characters");
                     return;
-                }
+                } else binding.passwordText.setError(null);
+
                 if (binding.checkBox.isChecked()){
                     isNGO = true;
                 }
@@ -68,7 +74,8 @@ boolean isNGO;
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if(task.isSuccessful()) {
-                            UserModel userModel = new UserModel(name, fAuth.getUid(), isNGO);
+                            long timestamp = new Date().getTime();
+                            UserModel userModel = new UserModel(name, fAuth.getUid(), isNGO, timestamp);
                             database.getReference().child("Users").child(fAuth.getUid()).child("Details").setValue(userModel);
                             startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                             finish();

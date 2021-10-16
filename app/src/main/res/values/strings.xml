@@ -12,4 +12,9 @@
     <string name="email">E-mail Id</string>
     <string name="password">Password</string>
     <string name="phone_number">Phone Number</string>
+    <string name="ngo_sign_up">NGO sign up</string>
+
+    <string name="upload_item">Upload an Item</string>
+
+    <string name="logout">Log out</string>
 </resources>

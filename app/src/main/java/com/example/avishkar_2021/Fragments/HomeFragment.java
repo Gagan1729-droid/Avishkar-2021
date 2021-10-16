@@ -4,11 +4,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.avishkar_2021.Adapters.ItemsAdapter;
 import com.example.avishkar_2021.Models.ItemModel;
@@ -44,6 +46,7 @@ DatabaseReference database;
 
         GridLayoutManager gridLayoutManager  = new GridLayoutManager(getContext(), 2);
         binding.homeRecyclerView.setLayoutManager(gridLayoutManager);
+        binding.homeRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
 
         database = FirebaseDatabase.getInstance().getReference();
         fAuth = FirebaseAuth.getInstance();

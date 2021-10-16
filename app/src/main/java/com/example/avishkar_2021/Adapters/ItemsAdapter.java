@@ -37,7 +37,6 @@ public ItemsAdapter(Context context, ArrayList<ItemModel> list){
         ItemModel model = list.get(position);
         Picasso.get().load(model.getImage()).placeholder(R.drawable.math_logo).into(holder.image);
         holder.name.setText(model.getName());
-        holder.price.setText("Rs. "+ Integer.toString(model.getPrice()));
     }
 
     @Override
@@ -52,7 +51,6 @@ public ItemsAdapter(Context context, ArrayList<ItemModel> list){
             super(itemView);
             image = itemView.findViewById(R.id.item_image);
             name = itemView.findViewById(R.id.item_name);
-            price = itemView.findViewById(R.id.item_price);
         }
     }
 }

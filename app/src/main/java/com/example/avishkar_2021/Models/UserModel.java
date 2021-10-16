@@ -1,16 +1,26 @@
 package com.example.avishkar_2021.Models;
 
 public class UserModel {
-    private String name, UserId;
+    private String name, userId;
     private boolean isNGO;
+    private long timestamp;
 
     public UserModel() {
     }
 
-    public UserModel(String name, String userId, boolean isNGO) {
+    public UserModel(String name, String userId, boolean isNGO, long timestamp) {
         this.name = name;
-        UserId = userId;
+        this.userId = userId;
         this.isNGO = isNGO;
+        this.timestamp = timestamp;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getName() {
@@ -22,11 +32,11 @@ public class UserModel {
     }
 
     public String getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(String userId) {
-        UserId = userId;
+        userId = userId;
     }
 
     public boolean isNGO() {

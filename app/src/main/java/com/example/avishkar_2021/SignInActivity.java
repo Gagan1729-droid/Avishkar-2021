@@ -40,13 +40,15 @@ FirebaseAuth fAuth;
                 String email = binding.email.getText().toString(),
                         passw = binding.password.getText().toString();
                 if(email.isEmpty()){
-                    binding.email.setError("Email required");
+                    binding.emailText.setError("Email required");
                     return;
                 }
+                else binding.emailText.setError(null);
                 if(passw.isEmpty()){
-                    binding.password.setError("Password required");
+                    binding.passwordText.setError("Password required");
                     return;
-                }
+                } else binding.passwordText.setError(null);
+
                 progressDialog.show();
                 fAuth.signInWithEmailAndPassword(email, passw).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -55,6 +57,7 @@ FirebaseAuth fAuth;
                         if(task.isSuccessful()){
                             Toast.makeText(SignInActivity.this, "Signed in Successfully", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                             finish();
                         }
                         else

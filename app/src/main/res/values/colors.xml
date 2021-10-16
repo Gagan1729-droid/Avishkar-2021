@@ -8,11 +8,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="colorPrimary">#D37A3F</color>
+    <color name="colorPrimaryStatusBar">#EFBC87</color>
+    <color name="textInputOutlineColor">#D18F83</color>
+
     <color name="fbcolor">#3c62ac</color>
     <color name="gcolor">#C3463B</color>
     <color name="phonecolor">#2E8C23</color>
 
-    <color name="signin_btn_background_start">#443C20</color>
+    <color name="signin_btn_background_start">#B16D4E</color>
     <color name="signin_btn_background_center">#DA7D61</color>
     <color name="signin_btn_background_end">#E8A564</color>
 </resources>

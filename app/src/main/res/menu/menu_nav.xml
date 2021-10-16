@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_sell"
+        android:id="@+id/nav_exchange"
         android:icon="@drawable/selling"
-        android:title="Sell"/>
+        android:title="Exchange"/>
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/home"

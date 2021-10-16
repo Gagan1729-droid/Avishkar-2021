@@ -5,20 +5,25 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.avishkar_2021.Fragments.ExchangeFragment;
 import com.example.avishkar_2021.Fragments.HomeFragment;
 import com.example.avishkar_2021.Fragments.MyActivityFragment;
 import com.example.avishkar_2021.Fragments.ProfileFragment;
-import com.example.avishkar_2021.Fragments.SellFragment;
 import com.example.avishkar_2021.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     ActionBar actionBar;
     BottomNavigationView navigationView;
+    FirebaseAuth fAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar = getSupportActionBar();
         actionBar.setTitle("Hello");
 
+        fAuth = FirebaseAuth.getInstance();
         binding.navigation.setOnNavigationItemSelectedListener(selectedListener);
         binding.navigation.setSelectedItemId(R.id.nav_home);
         HomeFragment fragment = new HomeFragment();
@@ -62,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
                             fragmentTransaction2.replace(R.id.container, fragment2, "");
                             fragmentTransaction2.commit();
                             return true;
-                        case R.id.nav_sell:
+                        case R.id.nav_exchange:
                             actionBar.setTitle("Sell");
-                            SellFragment fragment3 = new SellFragment();
+                            ExchangeFragment fragment3 = new ExchangeFragment();
                             FragmentTransaction fragmentTransaction3 = getSupportFragmentManager().beginTransaction();
                             fragmentTransaction3.replace(R.id.container, fragment3, "");
                             fragmentTransaction3.commit();
@@ -74,4 +80,20 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.logout){
+            fAuth.signOut();
+            startActivity(new Intent(MainActivity.this, SignInActivity.class));
+            finish();
+            Toast.makeText(this, "Logged out Successfully", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
