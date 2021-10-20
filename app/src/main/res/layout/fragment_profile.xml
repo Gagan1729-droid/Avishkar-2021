@@ -1,14 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="54dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/text_bg"
+        android:fontFamily="@font/almendra_bold_italic"
+        android:gravity="center_vertical"
+        android:paddingLeft="50dp"
+        android:text="@string/my_profile"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="41dp" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/avatar"/>
+
+
+        <!--            android:layout_gravity="end"-->
+
+        <ImageView
+            android:id="@+id/cam"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="-20dp"
+            android:layout_marginTop="56dp"
+            android:clickable="true"
+            tools:layout_editor_absoluteY="298dp"
+            tools:src="@drawable/camera" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name_profile"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:gravity="bottom"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                tools:layout_editor_absoluteX="63dp"
+                tools:layout_editor_absoluteY="169dp" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="address"
+                tools:layout_editor_absoluteX="87dp"
+                tools:layout_editor_absoluteY="298dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/edit_profile"
+        android:layout_width="239dp"
+        android:layout_height="53dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/bg_text"
+        android:fontFamily="@font/almendra_bold_italic"
+        android:gravity="center"
+        android:text="EDIT PROFILE"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="349dp" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:layout_marginTop="270dp"
+        android:background="#000000" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="290dp"
+        android:background="@drawable/text_bg"
+        android:fontFamily="@font/almendra_bold_italic"
+        android:gravity="center_vertical"
+        android:paddingLeft="50dp"
+        android:text="@string/history"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="188dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="355dp" />
+
+</RelativeLayout>

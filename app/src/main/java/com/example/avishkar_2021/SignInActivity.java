@@ -30,10 +30,6 @@ FirebaseAuth fAuth;
         progressDialog.setMessage("Please wait while we sign you in");
 
         fAuth = FirebaseAuth.getInstance();
-        if (fAuth.getCurrentUser()!=null){
-            startActivity(new Intent(SignInActivity.this, MainActivity.class));
-            finish();
-        }
         binding.signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

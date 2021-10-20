@@ -75,9 +75,6 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 } else binding.passwordText.setError(null);
 
-                if (binding.checkBox.isChecked()) {
-                    isNGO = true;
-                }
                 progressDialog.show();
                 fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

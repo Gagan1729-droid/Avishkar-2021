@@ -16,6 +16,9 @@
 
     <string name="upload_item">Upload an Item</string>
 
+    <string name="my_profile">My Profile</string>
+    <string name="history">History</string>
+
     <string name="item_mane">Product</string>
     <string name="item_description">Description</string>
     <string name="item_exchanges">Valid Exchanges</string>
@@ -23,4 +26,13 @@
     <string name="item_location">Product available at</string>
 
     <string name="logout">Log out</string>
+    <string name="all_rights_are_reserved">All rights reserved</string>
+    <string name="skip">Skip</string>
+    <string name="create_account">Create an UsIt account</string>
+    <string name="tagline">One account for everything, UsIt</string>
+    <string name="learn_more">Learn More</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_pass">Forgot Password</string>
+
 </resources>

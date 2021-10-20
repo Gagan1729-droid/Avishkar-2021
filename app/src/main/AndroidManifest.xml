@@ -4,7 +4,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -13,20 +14,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Avishkar2021">
-        <activity android:name=".DisplayItemActivity"></activity>
-        <activity android:name=".ExchangeActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".SignInActivity">
+        <activity android:name=".SignInUpActivity"></activity>
+        <activity android:name=".MainSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DisplayItemActivity" />
+        <activity android:name=".ExchangeActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SignInActivity"></activity>
         <activity android:name=".MainActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Theme.AppCompat" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

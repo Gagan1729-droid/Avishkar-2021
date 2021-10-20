@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,8 +71,10 @@ DatabaseReference database;
         database.child("Exchanges Available").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                int i=1;
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     ExchangeItemModel model = dataSnapshot.getValue(ExchangeItemModel.class);
+                    Log.e("In ExchagesAvailabe ", "modelllllllllllll" + i++);
                     list.add(model);
                 }
             }

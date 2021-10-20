@@ -12,6 +12,9 @@
     <color name="colorPrimaryStatusBar">#EFBC87</color>
     <color name="textInputOutlineColor">#D18F83</color>
 
+    <color name="gradient_start">#443C20</color>
+    <color name="gradient_end">#e8a564</color>
+
     <color name="fbcolor">#3c62ac</color>
     <color name="gcolor">#C3463B</color>
     <color name="phonecolor">#2E8C23</color>
