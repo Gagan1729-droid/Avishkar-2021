@@ -16,5 +16,11 @@
 
     <string name="upload_item">Upload an Item</string>
 
+    <string name="item_mane">Product</string>
+    <string name="item_description">Description</string>
+    <string name="item_exchanges">Valid Exchanges</string>
+    <string name="item_seller">Exchanger</string>
+    <string name="item_location">Product available at</string>
+
     <string name="logout">Log out</string>
 </resources>

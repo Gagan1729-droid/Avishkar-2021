@@ -4,6 +4,7 @@ public class UserModel {
     private String name, userId;
     private boolean isNGO;
     private long timestamp;
+    private double latitude, longitude;
 
     public UserModel() {
     }
@@ -13,6 +14,31 @@ public class UserModel {
         this.userId = userId;
         this.isNGO = isNGO;
         this.timestamp = timestamp;
+    }
+
+    public UserModel(String name, String userId, boolean isNGO, long timestamp, double latitude, double longitude) {
+        this.name = name;
+        this.userId = userId;
+        this.isNGO = isNGO;
+        this.timestamp = timestamp;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public long getTimestamp() {

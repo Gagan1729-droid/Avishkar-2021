@@ -7,13 +7,22 @@ public class ExchangeItemModel {
     public ExchangeItemModel() {
     }
 
-    public ExchangeItemModel(String item_name, String city, String description, String item_id, String items_exchange, String item_images) {
+    public ExchangeItemModel(String item_name, String city, String description, String item_id, String items_exchange, String item_images, String seller_name) {
         this.item_name = item_name;
         this.city = city;
         this.description = description;
         this.item_id = item_id;
         this.items_exchange = items_exchange;
         this.item_images = item_images;
+        this.seller_name = seller_name;
+    }
+
+    public String getSeller_name() {
+        return seller_name;
+    }
+
+    public void setSeller_name(String seller_name) {
+        this.seller_name = seller_name;
     }
 
     public String getItem_name() {

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -17,6 +18,7 @@ import com.example.avishkar_2021.Models.ExchangeItemModel;
 import com.example.avishkar_2021.Models.ItemModel;
 import com.example.avishkar_2021.Models.UserModel;
 import com.example.avishkar_2021.R;
+import com.example.avishkar_2021.UtilityClasses.SpaceItemDecoration;
 import com.example.avishkar_2021.databinding.FragmentHomeBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -47,18 +49,17 @@ DatabaseReference database;
 
         GridLayoutManager gridLayoutManager  = new GridLayoutManager(getContext(), 2);
         binding.homeRecyclerView.setLayoutManager(gridLayoutManager);
-        binding.homeRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
+        binding.homeRecyclerView.addItemDecoration(new SpaceItemDecoration(10));
+        binding.homeRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         database = FirebaseDatabase.getInstance().getReference();
         fAuth = FirebaseAuth.getInstance();
         String uid = fAuth.getUid();
-        database.child("Users").child(uid).addValueEventListener(new ValueEventListener() {
+        database.child("Users").child(uid).child("Details").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    UserModel model = dataSnapshot.getValue(UserModel.class);
+                    UserModel model = snapshot.getValue(UserModel.class);
                     binding.welcomeMessage.setText("Welcome " + model.getName());
-                }
             }
 
             @Override

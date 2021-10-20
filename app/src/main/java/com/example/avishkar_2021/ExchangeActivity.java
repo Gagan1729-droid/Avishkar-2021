@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.avishkar_2021.Models.ExchangeItemModel;
+import com.example.avishkar_2021.Models.UserModel;
 import com.example.avishkar_2021.databinding.ActivityExchangeBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +38,7 @@ public class ExchangeActivity extends AppCompatActivity {
     FirebaseAuth fAuth;
     String uid;
     String pictures_storage_id;
+    String seller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,19 @@ public class ExchangeActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         long timestamp = new Date().getTime();
         String item_id = uid + timestamp;
+
+         database.getReference().child("Users").child(uid).child("Details").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                UserModel userModel = snapshot.getValue(UserModel.class);
+                seller = userModel.getName();
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
 
         binding.addImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +101,7 @@ public class ExchangeActivity extends AppCompatActivity {
                     return;
                 }
 
-                ExchangeItemModel model = new ExchangeItemModel(name, location, description, item_id, exchanges, pictures_storage_id);
+                ExchangeItemModel model = new ExchangeItemModel(name, location, description, item_id, exchanges, pictures_storage_id, seller);
 
                 database.getReference().child("Users").child(uid).child("Exchanges proposed").child(item_id).setValue(model);
 

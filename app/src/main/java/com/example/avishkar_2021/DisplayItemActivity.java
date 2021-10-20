@@ -36,6 +36,7 @@ public class DisplayItemActivity extends AppCompatActivity {
         binding.itemName.setText(model.getItem_name());
         binding.itemDescription.setText(model.getDescription());
         binding.itemExchanges.setText(model.getItems_exchange());
+        binding.itemLocation.setText(model.getCity());
 
         String[] images = model.getItem_images().split("\n");
 

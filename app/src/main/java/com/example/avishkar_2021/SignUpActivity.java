@@ -2,9 +2,15 @@ package com.example.avishkar_2021;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -23,16 +29,20 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Date;
 
 public class SignUpActivity extends AppCompatActivity {
-ActivitySignUpBinding binding;
-FirebaseAuth fAuth;
-FirebaseDatabase database;
-boolean isNGO;
+    ActivitySignUpBinding binding;
+    FirebaseAuth fAuth;
+    FirebaseDatabase database;
+    boolean isNGO;
+    LocationManager locationManager;
+    static final int REQUEST_FINE_LOCATION = 11;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait...");
         progressDialog.setMessage("We are creating your account");
@@ -45,27 +55,27 @@ boolean isNGO;
                 String name = binding.userName.getText().toString(),
                         email = binding.email.getText().toString(),
                         password = binding.password.getText().toString();
-                if(email.isEmpty()){
+                if (email.isEmpty()) {
                     binding.emailText.setError("Email necessary");
                     return;
                 } else binding.emailText.setError(null);
 
-                if(name.isEmpty()){
+                if (name.isEmpty()) {
                     binding.nameText.setError("Name necessary");
                     return;
                 } else binding.nameText.setError(null);
 
-                if(password.isEmpty()){
+                if (password.isEmpty()) {
                     binding.passwordText.setError("Password is required");
                     return;
                 } else binding.passwordText.setError(null);
 
-                if(password.length() < 6){
+                if (password.length() < 6) {
                     binding.passwordText.setError("Password must be atleast 6 characters");
                     return;
                 } else binding.passwordText.setError(null);
 
-                if (binding.checkBox.isChecked()){
+                if (binding.checkBox.isChecked()) {
                     isNGO = true;
                 }
                 progressDialog.show();
@@ -73,9 +83,16 @@ boolean isNGO;
                     @Override
                     public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                         progressDialog.dismiss();
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             long timestamp = new Date().getTime();
-                            UserModel userModel = new UserModel(name, fAuth.getUid(), isNGO, timestamp);
+                            if (ActivityCompat.checkSelfPermission(SignUpActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                                ActivityCompat.requestPermissions(SignUpActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION);
+                            }
+                            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            double latitude = location.getLatitude(),
+                                    longitude = location.getLongitude();
+                            UserModel userModel = new UserModel(name, fAuth.getUid(), isNGO, timestamp, latitude, longitude);
+
                             database.getReference().child("Users").child(fAuth.getUid()).child("Details").setValue(userModel);
                             startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                             finish();
@@ -94,5 +111,15 @@ boolean isNGO;
                 SignUpActivity.this.finish();
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQUEST_FINE_LOCATION){
+            if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+
+            }
+        }
     }
 }
