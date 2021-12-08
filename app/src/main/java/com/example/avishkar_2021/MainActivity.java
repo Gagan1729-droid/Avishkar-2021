@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     MeowBottomNavigation bottomNavigation;
     FrameLayout frameLayout;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         frameLayout = binding.frame;
         bottomNavigation = binding.bottomnavigation;
-
         bottomNavigation.add(new MeowBottomNavigation.Model(1,R.drawable.ic_baseline_forum_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(2,R.drawable.ic_baseline_home_24));
         bottomNavigation.add(new MeowBottomNavigation.Model(3,R.drawable.ic_dollars_money_bag_on_a_hand));
@@ -77,62 +78,10 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
             @Override
             public void onReselectItem(MeowBottomNavigation.Model item) {
-               // Toast.makeText(MainActivity.this, "reselected item : " + item.getId(), Toast.LENGTH_SHORT).show();
             }
         });
         bottomNavigation.show(2, true);
-
-
-
-//        actionBar = getSupportActionBar();
-//        actionBar.setTitle("Hello");
-//
-//        fAuth = FirebaseAuth.getInstance();
-//        binding.navigation.setOnNavigationItemSelectedListener(selectedListener);
-//        binding.navigation.setSelectedItemId(R.id.nav_home);
-//        HomeFragment fragment = new HomeFragment();
-//
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.container, fragment, "");
-//        fragmentTransaction.commit();
     }
-//    private BottomNavigationView.OnNavigationItemSelectedListener selectedListener =
-//            new BottomNavigationView.OnNavigationItemSelectedListener() {
-//                @Override
-//                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                    switch(item.getItemId()){
-//                        case R.id.nav_home:
-//                            actionBar.setTitle("Home");
-//                            HomeFragment fragment = new HomeFragment();
-//                            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                            fragmentTransaction.replace(R.id.container, fragment, "");
-//                            fragmentTransaction.commit();
-//                            return true;
-//                        case R.id.nav_activity:
-//                            actionBar.setTitle("My Activity");
-//                            MyActivityFragment fragment1 = new MyActivityFragment();
-//                            FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
-//                            fragmentTransaction1.replace(R.id.container, fragment1, "");
-//                            fragmentTransaction1.commit();
-//                            return true;
-//                        case R.id.nav_profile:
-//                            actionBar.setTitle("Profile");
-//                            ProfileFragment fragment2 = new ProfileFragment();
-//                            FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-//                            fragmentTransaction2.replace(R.id.container, fragment2, "");
-//                            fragmentTransaction2.commit();
-//                            return true;
-//                        case R.id.nav_exchange:
-//                            actionBar.setTitle("Sell");
-//                            ExchangeFragment fragment3 = new ExchangeFragment();
-//                            FragmentTransaction fragmentTransaction3 = getSupportFragmentManager().beginTransaction();
-//                            fragmentTransaction3.replace(R.id.container, fragment3, "");
-//                            fragmentTransaction3.commit();
-//                            return true;
-//                        }
-//                    return false;
-//                }
-//            };
 
     private void loadfragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().

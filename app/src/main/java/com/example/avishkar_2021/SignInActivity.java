@@ -52,9 +52,10 @@ FirebaseAuth fAuth;
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
                             Toast.makeText(SignInActivity.this, "Signed in Successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                            Intent i = new Intent(SignInActivity.this, MainActivity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i);
                             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                            finish();
                         }
                         else
                             Toast.makeText(SignInActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -29,12 +30,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Date;
 
 public class SignUpActivity extends AppCompatActivity {
+    private static final int REQUEST_FINE_LOCATION = 11;
     ActivitySignUpBinding binding;
     FirebaseAuth fAuth;
     FirebaseDatabase database;
     boolean isNGO;
     LocationManager locationManager;
-    static final int REQUEST_FINE_LOCATION = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,11 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 } else binding.passwordText.setError(null);
 
+                if (ActivityCompat.checkSelfPermission(SignUpActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                        ActivityCompat.checkSelfPermission(SignUpActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+
                 progressDialog.show();
                 fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -82,10 +88,7 @@ public class SignUpActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         if (task.isSuccessful()) {
                             long timestamp = new Date().getTime();
-                            if (ActivityCompat.checkSelfPermission(SignUpActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-                                ActivityCompat.requestPermissions(SignUpActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION);
-                            }
-                            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            @SuppressLint("MissingPermission") Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                             double latitude = location.getLatitude(),
                                     longitude = location.getLongitude();
                             UserModel userModel = new UserModel(name, fAuth.getUid(), isNGO, timestamp, latitude, longitude);
@@ -109,13 +112,12 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == REQUEST_FINE_LOCATION){
-            if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
-
+            if(!(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED)){
+                Toast.makeText(this, "Please grant location permissions", Toast.LENGTH_SHORT).show();
             }
         }
     }

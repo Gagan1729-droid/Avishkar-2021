@@ -24,4 +24,8 @@
     <style name= "TextAppearance.Avishkar2021.TextInputLayout.HintText" parent="TextAppearance.MaterialComponents.Subtitle2">
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
+
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+    </style>
 </resources>

@@ -37,6 +37,7 @@ FragmentHomeBinding binding;
 ArrayList<ExchangeItemModel> list = new ArrayList<>();
 FirebaseAuth fAuth;
 DatabaseReference database;
+UserModel userModel;
     public HomeFragment(){
     }
 
@@ -59,8 +60,8 @@ DatabaseReference database;
         database.child("Users").child(uid).child("Details").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    UserModel model = snapshot.getValue(UserModel.class);
-                    binding.welcomeMessage.setText("Welcome " + model.getName());
+                    userModel = snapshot.getValue(UserModel.class);
+                    binding.welcomeMessage.setText("Welcome " + userModel.getName());
             }
 
             @Override
@@ -74,7 +75,6 @@ DatabaseReference database;
                 int i=1;
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     ExchangeItemModel model = dataSnapshot.getValue(ExchangeItemModel.class);
-                    Log.e("In ExchagesAvailabe ", "modelllllllllllll" + i++);
                     list.add(model);
                 }
             }

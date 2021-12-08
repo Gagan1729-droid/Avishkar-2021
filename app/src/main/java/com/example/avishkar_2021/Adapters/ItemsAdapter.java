@@ -64,7 +64,7 @@ public ItemsAdapter(Context context, ArrayList<ExchangeItemModel> list){
 
     public class ViewHolder extends RecyclerView.ViewHolder {
     ImageView image;
-    TextView name, price;
+    TextView name;
         public ViewHolder(@NonNull @org.jetbrains.annotations.NotNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.item_image);

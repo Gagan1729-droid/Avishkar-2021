@@ -35,4 +35,7 @@
     <string name="remember_me">Remember me</string>
     <string name="forgot_pass">Forgot Password</string>
 
+    <string name="edit_profile">Edit Profile</string>
+    <string name="edit_location">Location</string>
+
 </resources>
