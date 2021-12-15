@@ -1,13 +1,13 @@
 package com.example.avishkar_2021.Models;
 
 public class ExchangeItemModel {
-    String item_name, city, description, item_id, items_exchange, item_images, seller_name;
+    String item_name, city, description, item_id, items_exchange, item_images, seller_name, seller_id;
     long timestamp;
 
     public ExchangeItemModel() {
     }
 
-    public ExchangeItemModel(String item_name, String city, String description, String item_id, String items_exchange, String item_images, String seller_name) {
+    public ExchangeItemModel(String item_name, String city, String description, String item_id, String items_exchange, String item_images, String seller_name, String seller_id) {
         this.item_name = item_name;
         this.city = city;
         this.description = description;
@@ -15,6 +15,7 @@ public class ExchangeItemModel {
         this.items_exchange = items_exchange;
         this.item_images = item_images;
         this.seller_name = seller_name;
+        this.seller_id = seller_id;
     }
 
     public String getSeller_name() {
@@ -71,5 +72,13 @@ public class ExchangeItemModel {
 
     public void setItem_images(String item_images) {
         this.item_images = item_images;
+    }
+
+    public String getSeller_id() {
+        return seller_id;
+    }
+
+    public void setSeller_id(String seller_id) {
+        this.seller_id = seller_id;
     }
 }

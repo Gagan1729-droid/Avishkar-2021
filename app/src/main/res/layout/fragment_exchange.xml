@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="5dp"
+        android:background="@drawable/btn_gradient"
         app:cardCornerRadius="6dp">
 
         <TextView
@@ -20,7 +21,8 @@
             android:layout_height="wrap_content"
             android:text="@string/upload_item"
             android:textSize="30sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:layout_gravity="center"/>
     </androidx.cardview.widget.CardView>
 
 

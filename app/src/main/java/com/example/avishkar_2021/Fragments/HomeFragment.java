@@ -57,25 +57,30 @@ UserModel userModel;
         database = FirebaseDatabase.getInstance().getReference();
         fAuth = FirebaseAuth.getInstance();
         String uid = fAuth.getUid();
-        database.child("Users").child(uid).child("Details").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+        if(uid!=null) {
+            database.child("Users").child(uid).child("Details").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                     userModel = snapshot.getValue(UserModel.class);
                     binding.welcomeMessage.setText("Welcome " + userModel.getName());
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-            }
-        });
-        database.child("Exchanges Available").addValueEventListener(new ValueEventListener() {
+                }
+            });
+        }
+        else binding.welcomeMessage.setText("Welcome User");
+
+        database.child("Exchanges Available").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 int i=1;
                 for(DataSnapshot dataSnapshot: snapshot.getChildren()){
                     ExchangeItemModel model = dataSnapshot.getValue(ExchangeItemModel.class);
                     list.add(model);
+                    adapter.notifyDataSetChanged();
                 }
             }
 

@@ -2,6 +2,8 @@ package com.example.avishkar_2021;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.avishkar_2021.Adapters.SliderAdapter;
@@ -28,7 +30,8 @@ public class DisplayItemActivity extends AppCompatActivity {
         binding = ActivityDisplayItemBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        model = new Gson().fromJson(getIntent().getStringExtra("ItemModelClass"), ExchangeItemModel.class);
+        String json = getIntent().getStringExtra("ItemModelClass");
+        model = new Gson().fromJson(json, ExchangeItemModel.class);
         database = FirebaseDatabase.getInstance();
         fAuth = FirebaseAuth.getInstance();
         uid = fAuth.getUid();
@@ -37,6 +40,15 @@ public class DisplayItemActivity extends AppCompatActivity {
         binding.itemDescription.setText(model.getDescription());
         binding.itemExchanges.setText(model.getItems_exchange());
         binding.itemLocation.setText(model.getCity());
+        binding.itemSeller.setText(model.getSeller_name());
+
+        binding.chatButton.setOnClickListener(v -> {
+            Intent i = new Intent(DisplayItemActivity.this, ChatActivity.class);
+            Gson gson = new Gson();
+            i.putExtra("ItemModelClass", json);
+            startActivity(i);
+            overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
+        });
 
         String[] images = model.getItem_images().split("\n");
 

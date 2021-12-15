@@ -1,5 +1,6 @@
 package com.example.avishkar_2021.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import com.example.avishkar_2021.EditProfileDialogFragment;
 import com.example.avishkar_2021.Models.UserModel;
 import com.example.avishkar_2021.R;
+import com.example.avishkar_2021.SignInActivity;
+import com.example.avishkar_2021.SignUpActivity;
 import com.example.avishkar_2021.databinding.FragmentProfileBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment  {
     FragmentProfileBinding binding;
     FirebaseAuth fAuth;
     FirebaseDatabase database;
@@ -38,6 +41,22 @@ public class ProfileFragment extends Fragment {
         fAuth = FirebaseAuth.getInstance();
         uid = fAuth.getUid();
         database = FirebaseDatabase.getInstance();
+
+        if(uid==null) {
+            binding.loginProfileLinearLayout.setVisibility(View.VISIBLE);
+            binding.profileRelativeLayout.setVisibility(View.GONE);
+            binding.loginProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getContext(), SignInActivity.class));
+                }
+            });
+            binding.registerProfile.setOnClickListener(v-> {
+                startActivity(new Intent(getContext(), SignUpActivity.class));
+            });
+            return binding.getRoot();
+        }
+
         database.getReference().child("Users").child(uid).child("Details").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {

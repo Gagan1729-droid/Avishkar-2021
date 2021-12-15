@@ -101,7 +101,7 @@ public class ExchangeActivity extends AppCompatActivity {
                     return;
                 }
 
-                ExchangeItemModel model = new ExchangeItemModel(name, location, description, item_id, exchanges, pictures_storage_id, seller);
+                ExchangeItemModel model = new ExchangeItemModel(name, location, description, item_id, exchanges, pictures_storage_id, seller, uid);
 
                 database.getReference().child("Users").child(uid).child("Exchanges proposed").child(item_id).setValue(model);
 

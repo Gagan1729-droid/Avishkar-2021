@@ -26,10 +26,10 @@ import java.util.ArrayList;
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
 ArrayList<ExchangeItemModel> list;
 Context context;
-public ItemsAdapter(Context context, ArrayList<ExchangeItemModel> list){
-    this.context = context;
-    this.list = list;
-}
+    public ItemsAdapter(Context context, ArrayList<ExchangeItemModel> list){
+        this.context = context;
+        this.list = list;
+    }
     @NonNull
     @org.jetbrains.annotations.NotNull
     @Override
@@ -43,7 +43,7 @@ public ItemsAdapter(Context context, ArrayList<ExchangeItemModel> list){
         ExchangeItemModel model = list.get(position);
         String image = model.getItem_images();
         image = image.substring(0, image.indexOf("\n"));
-        Picasso.get().load(image).placeholder(R.drawable.math_logo).into(holder.image);
+        Picasso.get().load(image).placeholder(R.drawable.loading_image).into(holder.image);
         holder.name.setText(model.getItem_name());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

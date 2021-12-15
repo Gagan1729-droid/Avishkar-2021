@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragments.ProfileFragment">
+    tools:context=".Fragments.ProfileFragment"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/login_profile_linearLayout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/colorPrimaryStatusBar">
+
+        <TextView
+            android:id="@+id/login_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_profile_activity"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:fontFamily="@font/almendra_bold_italic"
+            android:padding="10dp"
+            android:background="@drawable/dotted_block"/>
+
+        <TextView
+            android:id="@+id/register_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/not_yet_registered"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/profile_relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
@@ -116,4 +152,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="355dp" />
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</LinearLayout>
